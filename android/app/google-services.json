@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "228184846938",
+    "project_id": "savvy-shopper-c8b37",
+    "storage_bucket": "savvy-shopper-c8b37.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:228184846938:android:3f991f864baf8c80c01e63",
+        "android_client_info": {
+          "package_name": "ryanrawlinson.savvy_shopper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "228184846938-t0qqtqb6imf6c4tcvr6h3ergkddqd1bk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwBJKHg-bUA-PvOmGOoCnCyKqskOWXq2w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "228184846938-t0qqtqb6imf6c4tcvr6h3ergkddqd1bk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "228184846938-duo6mjffjkdnkkla9puqe0uhv1n895ru.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "ryanrawlinson.savvyshopper"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:savvy_shopper/authentication/auth_manager.dart';
+import 'package:savvy_shopper/components/registration_submit_button.dart';
 import 'package:savvy_shopper/components/registration_textfield.dart';
 import 'package:savvy_shopper/components/social_signin_button.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final AuthManager _authManager = AuthManager();
+  String _email;
+  String _password;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +49,10 @@ class LoginScreen extends StatelessWidget {
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(top: 12.0),
-                                    child: Text('Sign in to Continue'),
+                                    child: Text(
+                                      'Sign in to Continue',
+                                      style: TextStyle(color: Colors.grey),
+                                    ),
                                   )
                                 ],
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,7 +86,10 @@ class LoginScreen extends StatelessWidget {
                               RegistrationTextField(
                                 inputType: TextInputType.emailAddress,
                                 labelText: 'Email',
-                                isPasswordEnabled: false,
+                                onChanged: (value) {
+                                  print(value);
+                                  _email = value;
+                                },
                               ),
                               SizedBox(
                                 height: 40.0,
@@ -81,6 +98,9 @@ class LoginScreen extends StatelessWidget {
                                 inputType: TextInputType.visiblePassword,
                                 labelText: 'Password',
                                 isPasswordEnabled: true,
+                                onChanged: (value) {
+                                  _password = value;
+                                },
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(top: 18.0),
@@ -96,17 +116,15 @@ class LoginScreen extends StatelessWidget {
                               ),
                               Padding(
                                 padding: EdgeInsets.only(top: 20.0),
-                                child: RaisedButton(
-                                  onPressed: () {},
-                                  child: Text(
-                                    'SIGN IN',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                  color: Colors.green.shade400,
-                                  padding: EdgeInsets.symmetric(vertical: 20.0),
+                                child: RegistrationSubmitButton(
+                                  buttonText: 'SIGN IN',
+                                  onSubmit: () async {
+                                    var user = await _authManager
+                                        .signInWithEmailAndPassword(
+                                            email: _email, password: _password);
+
+                                    print(user);
+                                  },
                                 ),
                               )
                             ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:savvy_shopper/components/registration_submit_button.dart';
 import 'package:savvy_shopper/components/registration_textfield.dart';
 
 class SignUpScreen extends StatelessWidget {
@@ -62,19 +63,11 @@ class SignUpScreen extends StatelessWidget {
                             ),
                             Padding(
                               padding: EdgeInsets.only(top: 60.0),
-                              child: RaisedButton(
-                                onPressed: () {},
-                                child: Text(
-                                  'SIGN IN',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                                color: Colors.green.shade400,
-                                padding: EdgeInsets.symmetric(vertical: 20.0),
+                              child: RegistrationSubmitButton(
+                                buttonText: 'SIGN UP',
+                                onSubmit: null,
                               ),
-                            )
+                            ),
                           ],
                         ),
                       )

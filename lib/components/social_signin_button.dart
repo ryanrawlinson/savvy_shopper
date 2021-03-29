@@ -9,6 +9,7 @@ class SocialSignInTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
+      onPressed: () {},
       child: ListTile(
         leading: Image.asset(
           iconPath,
