@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 
 class SocialSignInTile extends StatelessWidget {
-  SocialSignInTile({this.iconPath, this.titleText});
-
   final String iconPath;
   final String titleText;
+  final Function onPressed;
+
+  SocialSignInTile({
+    @required this.iconPath,
+    @required this.titleText,
+    @required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +28,7 @@ class SocialSignInTile extends StatelessWidget {
         trailing: SizedBox(
           width: 0.0,
         ),
+        onTap: onPressed,
       ),
     );
   }

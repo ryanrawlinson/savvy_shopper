@@ -5,7 +5,7 @@ import 'package:savvy_shopper/authentication/auth_manager.dart';
 import 'package:savvy_shopper/components/registration_submit_button.dart';
 import 'package:savvy_shopper/components/registration_textfield.dart';
 import 'package:savvy_shopper/components/social_signin_button.dart';
-import 'package:savvy_shopper/utilities/constants.dart';
+import 'package:savvy_shopper/utilities/functions.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -181,6 +181,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 SocialSignInTile(
                   iconPath: 'images/facebook.png',
                   titleText: 'Sign in with Facebook',
+                  onPressed: () {},
                 ),
                 SizedBox(
                   height: 20.0,
@@ -188,6 +189,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 SocialSignInTile(
                   iconPath: 'images/google.png',
                   titleText: 'Sign in with Google',
+                  onPressed: () {
+                    _authManager.signInWithGoogle();
+                  },
                 ),
               ],
             ),

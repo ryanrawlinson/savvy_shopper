@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:savvy_shopper/utilities/constants.dart';
 
 class RegistrationSubmitButton extends StatelessWidget {
   final String buttonText;
@@ -15,13 +16,7 @@ class RegistrationSubmitButton extends StatelessWidget {
       onPressed: onSubmit,
       child: Padding(
         padding: const EdgeInsets.all(18.0),
-        child: Text(
-          buttonText,
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.w400,
-          ),
-        ),
+        child: Text(buttonText, style: kRegistrationButtonTextStyle),
       ),
       style: ElevatedButton.styleFrom(primary: Colors.green.shade400),
     );
