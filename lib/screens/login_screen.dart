@@ -6,6 +6,7 @@ import 'package:savvy_shopper/components/registration_submit_button.dart';
 import 'package:savvy_shopper/components/registration_textfield.dart';
 import 'package:savvy_shopper/components/social_signin_button.dart';
 import 'package:savvy_shopper/utilities/functions.dart';
+import 'package:savvy_shopper/utilities/strings.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -95,7 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   RegistrationTextField(
                                     inputType: TextInputType.emailAddress,
                                     labelText: 'Email',
-                                    errorMessage: 'Email address is required.',
+                                    errorMessage: kEmailAddressErrorText,
                                     onChanged: (value) {
                                       print(value);
                                       _email = value;
@@ -108,7 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     inputType: TextInputType.visiblePassword,
                                     labelText: 'Password',
                                     isPasswordEnabled: true,
-                                    errorMessage: 'Password is required.',
+                                    errorMessage: kPasswordErrorText,
                                     onChanged: (value) {
                                       _password = value;
                                     },
@@ -142,7 +143,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                                         email: _email,
                                                         password: _password);
 
-                                            print(user);
+                                            if (user != null) {
+                                              Navigator.pushNamed(
+                                                  context, '/explore');
+                                            }
                                           } catch (e) {
                                             setState(() {
                                               _isLoading = false;

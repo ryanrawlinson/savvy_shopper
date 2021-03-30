@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:savvy_shopper/screens/explore_screen.dart';
 import 'package:savvy_shopper/screens/login_screen.dart';
 import 'package:savvy_shopper/screens/signup_screen.dart';
 
@@ -18,6 +19,7 @@ class SavvyShopperApp extends StatelessWidget {
       routes: {
         '/login': (context) => LoginScreen(),
         '/signup': (context) => SignUpScreen(),
+        '/explore': (context) => ExploreScreen(),
       },
       theme: ThemeData.light().copyWith(
         backgroundColor: Colors.grey.shade100,
