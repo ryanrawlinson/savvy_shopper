@@ -6,16 +6,18 @@ class RegistrationTextField extends StatelessWidget {
     @required this.labelText,
     this.isPasswordEnabled = false,
     this.onChanged,
+    this.errorMessage,
   });
 
   final TextInputType inputType;
   final String labelText;
   final bool isPasswordEnabled;
   final Function onChanged;
+  final String errorMessage;
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       keyboardType: inputType,
       obscureText: isPasswordEnabled,
       decoration: InputDecoration(
@@ -23,6 +25,13 @@ class RegistrationTextField extends StatelessWidget {
         contentPadding: EdgeInsets.only(bottom: 0.0),
       ),
       onChanged: onChanged,
+      validator: (value) {
+        if (value.isEmpty || value == null) {
+          return errorMessage;
+        }
+
+        return null;
+      },
     );
   }
 }

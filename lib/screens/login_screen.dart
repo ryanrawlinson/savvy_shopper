@@ -5,6 +5,7 @@ import 'package:savvy_shopper/authentication/auth_manager.dart';
 import 'package:savvy_shopper/components/registration_submit_button.dart';
 import 'package:savvy_shopper/components/registration_textfield.dart';
 import 'package:savvy_shopper/components/social_signin_button.dart';
+import 'package:savvy_shopper/utilities/constants.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -13,9 +14,9 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final AuthManager _authManager = AuthManager();
+  final _formKey = GlobalKey<FormState>();
   String _email;
   String _password;
-  bool _isSuccess = false;
   bool _isLoading = false;
 
   @override
@@ -85,69 +86,83 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           Container(
                             margin: EdgeInsets.only(top: 60.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                RegistrationTextField(
-                                  inputType: TextInputType.emailAddress,
-                                  labelText: 'Email',
-                                  onChanged: (value) {
-                                    print(value);
-                                    _email = value;
-                                  },
-                                ),
-                                SizedBox(
-                                  height: 40.0,
-                                ),
-                                RegistrationTextField(
-                                  inputType: TextInputType.visiblePassword,
-                                  labelText: 'Password',
-                                  isPasswordEnabled: true,
-                                  onChanged: (value) {
-                                    _password = value;
-                                  },
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 18.0),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Text(
-                                        'Forgot Password?',
-                                        textAlign: TextAlign.end,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(top: 20.0),
-                                  child: RegistrationSubmitButton(
-                                    buttonText: 'SIGN IN',
-                                    onSubmit: () async {
-                                      setState(() {
-                                        _isLoading = true;
-                                      });
-
-                                      UserCredential user;
-                                      try {
-                                        user = await _authManager
-                                            .signInWithEmailAndPassword(
-                                                email: _email,
-                                                password: _password);
-
-                                        print(user);
-                                      } catch (e) {
-                                        print(e);
-                                      }
-
-                                      setState(() {
-                                        _isLoading = false;
-                                      });
+                            child: Form(
+                              key: _formKey,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  RegistrationTextField(
+                                    inputType: TextInputType.emailAddress,
+                                    labelText: 'Email',
+                                    errorMessage: 'Email address is required.',
+                                    onChanged: (value) {
+                                      print(value);
+                                      _email = value;
                                     },
                                   ),
-                                )
-                              ],
+                                  SizedBox(
+                                    height: 40.0,
+                                  ),
+                                  RegistrationTextField(
+                                    inputType: TextInputType.visiblePassword,
+                                    labelText: 'Password',
+                                    isPasswordEnabled: true,
+                                    errorMessage: 'Password is required.',
+                                    onChanged: (value) {
+                                      _password = value;
+                                    },
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 18.0),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                          'Forgot Password?',
+                                          textAlign: TextAlign.end,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(top: 20.0),
+                                    child: RegistrationSubmitButton(
+                                      buttonText: 'SIGN IN',
+                                      onSubmit: () async {
+                                        setState(() {
+                                          _isLoading = true;
+                                        });
+
+                                        if (_formKey.currentState.validate()) {
+                                          try {
+                                            UserCredential user =
+                                                await _authManager
+                                                    .signInWithEmailAndPassword(
+                                                        email: _email,
+                                                        password: _password);
+
+                                            print(user);
+                                          } catch (e) {
+                                            setState(() {
+                                              _isLoading = false;
+                                            });
+
+                                            showAlertDialog(
+                                                context,
+                                                'Login Failed',
+                                                'Your login information is incorrect please try again.');
+                                          }
+                                        }
+
+                                        setState(() {
+                                          _isLoading = false;
+                                        });
+                                      },
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                           )
                         ],
