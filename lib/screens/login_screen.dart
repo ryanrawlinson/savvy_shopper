@@ -47,10 +47,8 @@ class _LoginScreenState extends State<LoginScreen> {
           child: SafeArea(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
-                  height: 100.0,
-                ),
                 Card(
                     elevation: 2.0,
                     child: Padding(
@@ -194,47 +192,47 @@ class _LoginScreenState extends State<LoginScreen> {
                         ],
                       ),
                     )),
-                SizedBox(
-                  height: 20.0,
+                Padding(
+                  padding: EdgeInsets.only(top: 20.0),
+                  child: Text(
+                    '-OR-',
+                    textAlign: TextAlign.center,
+                  ),
                 ),
-                Text(
-                  '-OR-',
-                  textAlign: TextAlign.center,
+                Padding(
+                  padding: EdgeInsets.only(top: 20.0),
+                  child: SocialSignInTile(
+                    iconPath: 'images/facebook.png',
+                    titleText: 'Sign in with Facebook',
+                    onPressed: () {},
+                  ),
                 ),
-                SizedBox(
-                  height: 40.0,
-                ),
-                SocialSignInTile(
-                  iconPath: 'images/facebook.png',
-                  titleText: 'Sign in with Facebook',
-                  onPressed: () {},
-                ),
-                SizedBox(
-                  height: 20.0,
-                ),
-                SocialSignInTile(
-                  iconPath: 'images/google.png',
-                  titleText: 'Sign in with Google',
-                  onPressed: () async {
-                    try {
-                      User user = await _authManager.signInWithGoogle();
+                Padding(
+                  padding: EdgeInsets.only(top: 20.0),
+                  child: SocialSignInTile(
+                    iconPath: 'images/google.png',
+                    titleText: 'Sign in with Google',
+                    onPressed: () async {
+                      try {
+                        User user = await _authManager.signInWithGoogle();
 
-                      if (user != null) {
-                        Navigator.pushNamed(context, AppContainer.routeName);
+                        if (user != null) {
+                          Navigator.pushNamed(context, AppContainer.routeName);
 
-                        FocusScope.of(context).unfocus();
-                        _emailTextFieldController.clear();
-                        _passwordTextFieldController.clear();
+                          FocusScope.of(context).unfocus();
+                          _emailTextFieldController.clear();
+                          _passwordTextFieldController.clear();
+                        }
+                      } catch (e) {
+                        setState(() {
+                          _isLoading = false;
+                        });
+
+                        showAlertDialog(context, 'Login Failed',
+                            'Your login information is incorrect please try again.');
                       }
-                    } catch (e) {
-                      setState(() {
-                        _isLoading = false;
-                      });
-
-                      showAlertDialog(context, 'Login Failed',
-                          'Your login information is incorrect please try again.');
-                    }
-                  },
+                    },
+                  ),
                 ),
               ],
             ),
