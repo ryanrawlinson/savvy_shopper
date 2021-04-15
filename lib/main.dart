@@ -1,9 +1,22 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:savvy_shopper/models/provider/cart_model.dart';
+import 'package:savvy_shopper/screens/cart_content.dart';
+import 'package:savvy_shopper/screens/app_container.dart';
+import 'package:savvy_shopper/screens/item_details_screen.dart';
 import 'package:savvy_shopper/screens/login_screen.dart';
 import 'package:savvy_shopper/screens/signup_screen.dart';
 
-void main() {
-  runApp(SavvyShopperApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => CartModel(),
+      child: SavvyShopperApp(),
+    ),
+  );
 }
 
 class SavvyShopperApp extends StatelessWidget {
@@ -11,10 +24,13 @@ class SavvyShopperApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Savvy Shopper',
-      initialRoute: '/login',
+      initialRoute: LoginScreen.routeName,
       routes: {
-        '/login': (context) => LoginScreen(),
-        '/signup': (context) => SignUpScreen(),
+        LoginScreen.routeName: (context) => LoginScreen(),
+        SignUpScreen.routeName: (context) => SignUpScreen(),
+        AppContainer.routeName: (context) => AppContainer(),
+        ItemDetailsScreen.routeName: (context) => ItemDetailsScreen(),
+        CartScreen.routeName: (context) => CartScreen(),
       },
       theme: ThemeData.light().copyWith(
         backgroundColor: Colors.grey.shade100,
