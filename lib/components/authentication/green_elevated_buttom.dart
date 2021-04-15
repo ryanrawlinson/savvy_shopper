@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:savvy_shopper/utilities/constants.dart';
 
-class RegistrationSubmitButton extends StatelessWidget {
+class GreenElevatedButton extends StatelessWidget {
   final String buttonText;
-  final Function onSubmit;
+  final Function onClick;
 
-  RegistrationSubmitButton({
+  GreenElevatedButton({
     @required this.buttonText,
-    @required this.onSubmit,
+    @required this.onClick,
   });
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: onSubmit,
+      onPressed: onClick,
       child: Padding(
         padding: const EdgeInsets.all(18.0),
         child: Text(buttonText, style: kRegistrationButtonTextStyle),

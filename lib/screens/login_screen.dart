@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:savvy_shopper/authentication/auth_manager.dart';
-import 'package:savvy_shopper/components/authentication/registration_submit_button.dart';
+import 'package:savvy_shopper/components/authentication/green_elevated_buttom.dart';
 import 'package:savvy_shopper/components/authentication/registration_textfield.dart';
 import 'package:savvy_shopper/components/authentication/social_signin_button.dart';
 
@@ -10,6 +10,8 @@ import 'package:savvy_shopper/utilities/functions.dart';
 import 'package:savvy_shopper/utilities/strings.dart';
 
 class LoginScreen extends StatefulWidget {
+  static const routeName = '/login';
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -129,9 +131,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                   Padding(
                                     padding: EdgeInsets.only(top: 20.0),
-                                    child: RegistrationSubmitButton(
+                                    child: GreenElevatedButton(
                                       buttonText: 'SIGN IN',
-                                      onSubmit: () async {
+                                      onClick: () async {
                                         setState(() {
                                           _isLoading = true;
                                         });

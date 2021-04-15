@@ -2,11 +2,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:savvy_shopper/authentication/auth_manager.dart';
-import 'package:savvy_shopper/components/authentication/registration_submit_button.dart';
+import 'package:savvy_shopper/components/authentication/green_elevated_buttom.dart';
 import 'package:savvy_shopper/components/authentication/registration_textfield.dart';
 import 'package:savvy_shopper/utilities/strings.dart';
 
 class SignUpScreen extends StatefulWidget {
+  static const routeName = '/signup';
+
   @override
   _SignUpScreenState createState() => _SignUpScreenState();
 }
@@ -95,9 +97,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 ),
                                 Padding(
                                   padding: EdgeInsets.only(top: 60.0),
-                                  child: RegistrationSubmitButton(
+                                  child: GreenElevatedButton(
                                     buttonText: 'SIGN UP',
-                                    onSubmit: () async {
+                                    onClick: () async {
                                       setState(() {
                                         _isLoading = true;
                                       });
