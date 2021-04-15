@@ -39,11 +39,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
           padding: EdgeInsets.all(16.0),
           child: SafeArea(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                SizedBox(
-                  height: 100.0,
-                ),
                 Card(
                   elevation: 2.0,
                   child: Padding(
@@ -59,43 +57,45 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 fontSize: 35.0, fontWeight: FontWeight.bold),
                           ),
                           Container(
-                            margin: EdgeInsets.only(top: 60.0),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
-                                RegistrationTextField(
-                                  inputType: TextInputType.text,
-                                  labelText: 'Name',
-                                  isPasswordEnabled: false,
-                                  errorMessage: kNameErrorText,
-                                  onChanged: (value) {
-                                    _name = value;
-                                  },
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 40.0),
+                                  child: RegistrationTextField(
+                                    inputType: TextInputType.text,
+                                    labelText: 'Name',
+                                    isPasswordEnabled: false,
+                                    errorMessage: kNameErrorText,
+                                    onChanged: (value) {
+                                      _name = value;
+                                    },
+                                  ),
                                 ),
-                                SizedBox(
-                                  height: 40.0,
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 40.0),
+                                  child: RegistrationTextField(
+                                    inputType: TextInputType.emailAddress,
+                                    labelText: 'Email',
+                                    isPasswordEnabled: false,
+                                    errorMessage: kEmailAddressErrorText,
+                                    onChanged: (value) {
+                                      _email = value;
+                                    },
+                                  ),
                                 ),
-                                RegistrationTextField(
-                                  inputType: TextInputType.emailAddress,
-                                  labelText: 'Email',
-                                  isPasswordEnabled: false,
-                                  errorMessage: kEmailAddressErrorText,
-                                  onChanged: (value) {
-                                    _email = value;
-                                  },
-                                ),
-                                SizedBox(
-                                  height: 40.0,
-                                ),
-                                RegistrationTextField(
-                                  inputType: TextInputType.visiblePassword,
-                                  labelText: 'Password',
-                                  isPasswordEnabled: true,
-                                  errorMessage: kPasswordErrorText,
-                                  onChanged: (value) {
-                                    _password = value;
-                                  },
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 40.0),
+                                  child: RegistrationTextField(
+                                    inputType: TextInputType.visiblePassword,
+                                    labelText: 'Password',
+                                    isPasswordEnabled: true,
+                                    errorMessage: kPasswordErrorText,
+                                    onChanged: (value) {
+                                      _password = value;
+                                    },
+                                  ),
                                 ),
                                 Padding(
                                   padding: EdgeInsets.only(top: 60.0),

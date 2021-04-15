@@ -4,7 +4,7 @@ class RegistrationTextField extends StatelessWidget {
   RegistrationTextField({
     @required this.inputType,
     @required this.labelText,
-    @required this.controller,
+    this.controller,
     this.isPasswordEnabled = false,
     this.onChanged,
     this.errorMessage,
