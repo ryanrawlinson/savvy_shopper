@@ -215,8 +215,25 @@ class _LoginScreenState extends State<LoginScreen> {
                 SocialSignInTile(
                   iconPath: 'images/google.png',
                   titleText: 'Sign in with Google',
-                  onPressed: () {
-                    _authManager.signInWithGoogle();
+                  onPressed: () async {
+                    try {
+                      User user = await _authManager.signInWithGoogle();
+
+                      if (user != null) {
+                        Navigator.pushNamed(context, AppContainer.routeName);
+
+                        FocusScope.of(context).unfocus();
+                        _emailTextFieldController.clear();
+                        _passwordTextFieldController.clear();
+                      }
+                    } catch (e) {
+                      setState(() {
+                        _isLoading = false;
+                      });
+
+                      showAlertDialog(context, 'Login Failed',
+                          'Your login information is incorrect please try again.');
+                    }
                   },
                 ),
               ],
