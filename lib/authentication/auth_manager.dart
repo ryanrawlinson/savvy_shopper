@@ -4,6 +4,10 @@ import 'package:google_sign_in/google_sign_in.dart';
 class AuthManager {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
+  User getUser() {
+    return _auth.currentUser;
+  }
+
   Future<UserCredential> signUp(
       {String name, String email, String password}) async {
     return await _auth.createUserWithEmailAndPassword(
@@ -47,5 +51,9 @@ class AuthManager {
     }
 
     return user;
+  }
+
+  Future<void> signOut() async {
+    await _auth.signOut();
   }
 }

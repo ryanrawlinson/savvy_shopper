@@ -5,6 +5,7 @@ import 'package:savvy_shopper/authentication/auth_manager.dart';
 import 'package:savvy_shopper/components/authentication/green_elevated_buttom.dart';
 import 'package:savvy_shopper/components/authentication/registration_textfield.dart';
 import 'package:savvy_shopper/components/authentication/social_signin_button.dart';
+import 'package:savvy_shopper/screens/app_container.dart';
 
 import 'package:savvy_shopper/utilities/functions.dart';
 import 'package:savvy_shopper/utilities/strings.dart';
@@ -19,9 +20,20 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final AuthManager _authManager = AuthManager();
   final _formKey = GlobalKey<FormState>();
+
+  final TextEditingController _emailTextFieldController =
+      TextEditingController();
+  final TextEditingController _passwordTextFieldController =
+      TextEditingController();
+
   String _email;
   String _password;
   bool _isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -97,6 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
                                   RegistrationTextField(
+                                    controller: _emailTextFieldController,
                                     inputType: TextInputType.emailAddress,
                                     labelText: 'Email',
                                     errorMessage: kEmailAddressErrorText,
@@ -109,6 +122,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     height: 40.0,
                                   ),
                                   RegistrationTextField(
+                                    controller: _passwordTextFieldController,
                                     inputType: TextInputType.visiblePassword,
                                     labelText: 'Password',
                                     isPasswordEnabled: true,
@@ -147,8 +161,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                                         password: _password);
 
                                             if (user != null) {
-                                              Navigator.pushNamed(
-                                                  context, '/explore');
+                                              Navigator.pushNamed(context,
+                                                  AppContainer.routeName);
+
+                                              FocusScope.of(context).unfocus();
+                                              _emailTextFieldController.clear();
+                                              _passwordTextFieldController
+                                                  .clear();
                                             }
                                           } catch (e) {
                                             setState(() {
