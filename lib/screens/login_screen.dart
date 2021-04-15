@@ -2,10 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:savvy_shopper/authentication/auth_manager.dart';
-import 'package:savvy_shopper/components/authentication/green_elevated_buttom.dart';
+import 'package:savvy_shopper/components/green_elevated_button.dart';
 import 'package:savvy_shopper/components/authentication/registration_textfield.dart';
 import 'package:savvy_shopper/components/authentication/social_signin_button.dart';
 import 'package:savvy_shopper/screens/app_container.dart';
+import 'package:savvy_shopper/screens/signup_screen.dart';
+import 'package:savvy_shopper/utilities/constants.dart';
 
 import 'package:savvy_shopper/utilities/functions.dart';
 import 'package:savvy_shopper/utilities/strings.dart';
@@ -29,6 +31,49 @@ class _LoginScreenState extends State<LoginScreen> {
   String _email;
   String _password;
   bool _isLoading = false;
+
+  void _signInWithEmailAndPassword() async {
+    try {
+      UserCredential user = await _authManager.signInWithEmailAndPassword(
+          email: _email, password: _password);
+
+      if (user != null) {
+        Navigator.pushNamed(context, AppContainer.routeName);
+
+        FocusScope.of(context).unfocus();
+        _emailTextFieldController.clear();
+        _passwordTextFieldController.clear();
+      }
+    } catch (e) {
+      setState(() {
+        _isLoading = false;
+      });
+
+      showAlertDialog(context, 'Login Failed',
+          'Your login information is incorrect please try again.');
+    }
+  }
+
+  void _signInWithGoogle() async {
+    try {
+      User user = await _authManager.signInWithGoogle();
+
+      if (user != null) {
+        Navigator.pushNamed(context, AppContainer.routeName);
+
+        FocusScope.of(context).unfocus();
+        _emailTextFieldController.clear();
+        _passwordTextFieldController.clear();
+      }
+    } catch (e) {
+      setState(() {
+        _isLoading = false;
+      });
+
+      showAlertDialog(context, 'Login Failed',
+          'Your login information is incorrect please try again.');
+    }
+  }
 
   @override
   void initState() {
@@ -64,9 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   children: [
                                     Text(
                                       'Welcome,',
-                                      style: TextStyle(
-                                          fontSize: 35.0,
-                                          fontWeight: FontWeight.bold),
+                                      style: kAuthCardTitleStyle,
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.only(top: 12.0),
@@ -84,14 +127,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                   TextButton(
                                     child: Text(
                                       'Sign Up',
-                                      style: TextStyle(
-                                        color: Colors.green.shade300,
-                                        fontSize: 18.0,
-                                        fontWeight: FontWeight.w400,
-                                      ),
+                                      style: kSignUpTextStyle,
                                     ),
                                     onPressed: () {
-                                      Navigator.pushNamed(context, '/signup');
+                                      Navigator.pushNamed(
+                                          context, SignUpScreen.routeName);
                                     },
                                   ),
                                 ],
@@ -116,18 +156,18 @@ class _LoginScreenState extends State<LoginScreen> {
                                       _email = value;
                                     },
                                   ),
-                                  SizedBox(
-                                    height: 40.0,
-                                  ),
-                                  RegistrationTextField(
-                                    controller: _passwordTextFieldController,
-                                    inputType: TextInputType.visiblePassword,
-                                    labelText: 'Password',
-                                    isPasswordEnabled: true,
-                                    errorMessage: kPasswordErrorText,
-                                    onChanged: (value) {
-                                      _password = value;
-                                    },
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 40.0),
+                                    child: RegistrationTextField(
+                                      controller: _passwordTextFieldController,
+                                      inputType: TextInputType.visiblePassword,
+                                      labelText: 'Password',
+                                      isPasswordEnabled: true,
+                                      errorMessage: kPasswordErrorText,
+                                      onChanged: (value) {
+                                        _password = value;
+                                      },
+                                    ),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(top: 18.0),
@@ -151,32 +191,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         });
 
                                         if (_formKey.currentState.validate()) {
-                                          try {
-                                            UserCredential user =
-                                                await _authManager
-                                                    .signInWithEmailAndPassword(
-                                                        email: _email,
-                                                        password: _password);
-
-                                            if (user != null) {
-                                              Navigator.pushNamed(context,
-                                                  AppContainer.routeName);
-
-                                              FocusScope.of(context).unfocus();
-                                              _emailTextFieldController.clear();
-                                              _passwordTextFieldController
-                                                  .clear();
-                                            }
-                                          } catch (e) {
-                                            setState(() {
-                                              _isLoading = false;
-                                            });
-
-                                            showAlertDialog(
-                                                context,
-                                                'Login Failed',
-                                                'Your login information is incorrect please try again.');
-                                          }
+                                          _signInWithEmailAndPassword();
                                         }
 
                                         setState(() {
@@ -213,24 +228,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     iconPath: 'images/google.png',
                     titleText: 'Sign in with Google',
                     onPressed: () async {
-                      try {
-                        User user = await _authManager.signInWithGoogle();
-
-                        if (user != null) {
-                          Navigator.pushNamed(context, AppContainer.routeName);
-
-                          FocusScope.of(context).unfocus();
-                          _emailTextFieldController.clear();
-                          _passwordTextFieldController.clear();
-                        }
-                      } catch (e) {
-                        setState(() {
-                          _isLoading = false;
-                        });
-
-                        showAlertDialog(context, 'Login Failed',
-                            'Your login information is incorrect please try again.');
-                      }
+                      _signInWithGoogle();
                     },
                   ),
                 ),

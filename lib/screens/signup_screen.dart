@@ -2,9 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:savvy_shopper/authentication/auth_manager.dart';
-import 'package:savvy_shopper/components/authentication/green_elevated_buttom.dart';
+import 'package:savvy_shopper/components/green_elevated_button.dart';
 import 'package:savvy_shopper/components/authentication/registration_textfield.dart';
 import 'package:savvy_shopper/screens/app_container.dart';
+import 'package:savvy_shopper/utilities/constants.dart';
 import 'package:savvy_shopper/utilities/functions.dart';
 import 'package:savvy_shopper/utilities/strings.dart';
 
@@ -22,6 +23,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
   String _email;
   String _password;
   bool _isLoading = false;
+
+  void _onSignUpTapped() async {
+    try {
+      UserCredential user = await _authManager.signUp(
+        name: _name,
+        email: _email,
+        password: _password,
+      );
+
+      if (user != null) {
+        Navigator.pushNamed(context, AppContainer.routeName);
+      }
+
+      print(user);
+    } catch (e) {
+      setState(() {
+        _isLoading = false;
+      });
+
+      showAlertDialog(context, 'Unable to create account',
+          'Your account could not be created, please try again.');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,8 +77,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         children: [
                           Text(
                             'Sign Up',
-                            style: TextStyle(
-                                fontSize: 35.0, fontWeight: FontWeight.bold),
+                            style: kAuthCardTitleStyle,
                           ),
                           Container(
                             child: Column(
@@ -107,30 +130,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       });
 
                                       if (_formKey.currentState.validate()) {
-                                        try {
-                                          UserCredential user =
-                                              await _authManager.signUp(
-                                            name: _name,
-                                            email: _email,
-                                            password: _password,
-                                          );
-
-                                          if (user != null) {
-                                            Navigator.pushNamed(context,
-                                                AppContainer.routeName);
-                                          }
-
-                                          print(user);
-                                        } catch (e) {
-                                          setState(() {
-                                            _isLoading = false;
-                                          });
-
-                                          showAlertDialog(
-                                              context,
-                                              'Unable to create account',
-                                              'Your account could not be created, please try again.');
-                                        }
+                                        _onSignUpTapped();
                                       }
 
                                       setState(() {
