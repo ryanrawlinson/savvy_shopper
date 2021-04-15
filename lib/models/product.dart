@@ -5,6 +5,7 @@ class Product {
   final String description;
   final String category;
   final String image;
+  int quantity = 0;
 
   Product({
     this.id,

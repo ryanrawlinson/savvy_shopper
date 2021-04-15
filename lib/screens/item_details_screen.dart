@@ -1,6 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:savvy_shopper/components/authentication/green_elevated_buttom.dart';
+import 'package:savvy_shopper/models/product.dart';
+import 'package:savvy_shopper/models/provider/cart_model.dart';
 import 'package:savvy_shopper/screens/arguments/ItemDetailsScreenArguments.dart';
 
 class ItemDetailsScreen extends StatelessWidget {
@@ -10,6 +13,10 @@ class ItemDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final ItemDetailsScreenArguments arguments =
         ModalRoute.of(context).settings.arguments as ItemDetailsScreenArguments;
+
+    void addItemToCart(Product product) {
+      Provider.of<CartModel>(context, listen: false).add(product);
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -116,7 +123,18 @@ class ItemDetailsScreen extends StatelessWidget {
                           Expanded(
                             child: GreenElevatedButton(
                               buttonText: 'ADD',
-                              onClick: () {},
+                              onClick: () {
+                                addItemToCart(arguments.product);
+                                print(
+                                  Provider.of<CartModel>(context, listen: false)
+                                      .products
+                                      .map(
+                                        (e) => e.toJson().toString(),
+                                      ),
+                                );
+
+                                Navigator.pop(context);
+                              },
                             ),
                           ),
                         ],
