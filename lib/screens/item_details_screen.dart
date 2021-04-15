@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:savvy_shopper/components/authentication/green_elevated_buttom.dart';
+import 'package:savvy_shopper/components/green_elevated_button.dart';
 import 'package:savvy_shopper/models/product.dart';
 import 'package:savvy_shopper/models/provider/cart_model.dart';
 import 'package:savvy_shopper/screens/arguments/ItemDetailsScreenArguments.dart';

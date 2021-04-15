@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:savvy_shopper/authentication/auth_manager.dart';
-import 'package:savvy_shopper/components/authentication/green_elevated_buttom.dart';
+import 'package:savvy_shopper/components/green_elevated_button.dart';
 import 'package:savvy_shopper/screens/login_screen.dart';
 import 'package:savvy_shopper/utilities/functions.dart';
 
