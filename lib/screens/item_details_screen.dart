@@ -52,33 +52,35 @@ class ItemDetailsScreen extends StatelessWidget {
                       ),
                       Flexible(
                         flex: 3,
-                        child: Container(
-                          padding: EdgeInsets.all(16.0),
-                          color: Colors.white,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 42.0),
-                                child: Text(
-                                  arguments.product.title,
-                                  style: TextStyle(
-                                    fontSize: 26.0,
-                                    fontWeight: FontWeight.bold,
+                        child: SingleChildScrollView(
+                          child: Container(
+                            padding: EdgeInsets.all(16.0),
+                            color: Colors.white,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 42.0),
+                                  child: Text(
+                                    arguments.product.title,
+                                    style: TextStyle(
+                                      fontSize: 26.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 18.0),
-                                child: Text(
-                                  'Details',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18.0),
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 18.0),
+                                  child: Text(
+                                    'Details',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18.0),
+                                  ),
                                 ),
-                              ),
-                              Text(arguments.product.description)
-                            ],
+                                Text(arguments.product.description)
+                              ],
+                            ),
                           ),
                         ),
                       ),
