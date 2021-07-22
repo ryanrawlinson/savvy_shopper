@@ -94,22 +94,3 @@ class AccountContent extends StatelessWidget {
     );
   }
 }
-
-// Center(
-// child: GreenElevatedButton(
-// buttonText: 'SIGN OUT',
-// onClick: () async {
-// await _authManager.signOut();
-//
-// print(_authManager.getUser());
-//
-// if (_authManager.getUser() == null) {
-// Navigator.popUntil(
-// context, ModalRoute.withName(LoginScreen.routeName));
-// } else {
-// showAlertDialog(context, 'Sign out failed',
-// 'Sign out could not be completed, please try again.');
-// }
-// },
-// ),
-// );
