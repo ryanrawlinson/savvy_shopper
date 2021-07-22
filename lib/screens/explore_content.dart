@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:savvy_shopper/blocs/CategoryBloc.dart';
 import 'package:savvy_shopper/blocs/ProductsBloc.dart';
+import 'package:savvy_shopper/components/explore/explore_search_bar.dart';
 import 'package:savvy_shopper/components/explore/products_grid.dart';
 import 'package:savvy_shopper/models/categories.dart';
 import 'package:savvy_shopper/models/product.dart';
@@ -91,9 +92,14 @@ class _ExploreContentState extends State<ExploreContent> {
           switch (snapshot.data.status) {
             case Status.LOADING:
               return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
+                  AppBar(
+                    elevation: 0.0,
+                    backgroundColor: Colors.white,
+                    automaticallyImplyLeading: false,
+                    title: ExploreSearchBar(),
+                  ),
                   Center(child: CircularProgressIndicator()),
                 ],
               );
@@ -112,6 +118,12 @@ class _ExploreContentState extends State<ExploreContent> {
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
+                              AppBar(
+                                elevation: 0.0,
+                                backgroundColor: Colors.white,
+                                automaticallyImplyLeading: false,
+                                title: ExploreSearchBar(),
+                              ),
                               _getCategoryWidgets(
                                   snapshot.data.data.categories, _products),
                               Expanded(

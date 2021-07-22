@@ -9,7 +9,7 @@ class ExploreBottomNavBar extends StatelessWidget {
 
   final List<BottomNavigationBarItem> _bottomNavItems = [
     BottomNavigationBarItem(
-      title: Text('Explore'),
+      label: 'Explore',
       icon: Icon(
         Icons.whatshot_outlined,
         color: Colors.black,
@@ -19,7 +19,7 @@ class ExploreBottomNavBar extends StatelessWidget {
       ),
     ),
     BottomNavigationBarItem(
-      title: Text('Cart'),
+      label: 'Cart',
       icon: Icon(
         Icons.shopping_cart_outlined,
         color: Colors.black,
@@ -29,7 +29,7 @@ class ExploreBottomNavBar extends StatelessWidget {
       ),
     ),
     BottomNavigationBarItem(
-      title: Text('Account'),
+      label: 'Account',
       icon: Icon(
         Icons.account_circle_outlined,
         color: Colors.black,

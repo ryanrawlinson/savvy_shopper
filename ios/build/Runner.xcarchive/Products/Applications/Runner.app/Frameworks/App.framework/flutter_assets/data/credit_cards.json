@@ -1,0 +1,14 @@
+[
+  {
+    "number": "4436 0726 0369 4055",
+    "expiration": "3/24",
+    "cvvs": 754,
+    "cardType": "Visa"
+  },
+  {
+    "number": "2596 9362 2995 5902",
+    "expiration": "9/22",
+    "cvvs": 377,
+    "cardType": "Mastercard"
+  }
+]
