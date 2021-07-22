@@ -31,12 +31,12 @@ class _AppContainerState extends State<AppContainer> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          elevation: 0.0,
-          backgroundColor: Colors.white,
-          automaticallyImplyLeading: false,
-          title: ExploreSearchBar(),
-        ),
+        // appBar: AppBar(
+        //   elevation: 0.0,
+        //   backgroundColor: Colors.white,
+        //   automaticallyImplyLeading: false,
+        //   title: ExploreSearchBar(),
+        // ),
         body: _children[_selectedIndex],
         bottomNavigationBar: ExploreBottomNavBar(
           selectedIndex: _selectedIndex,
